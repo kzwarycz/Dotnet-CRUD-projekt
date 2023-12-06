@@ -28,7 +28,7 @@ namespace CRUD_Projekt.Pages.Movies
         public Movie Movie { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int rating)
         {
             if (!ModelState.IsValid)
             {
@@ -36,6 +36,10 @@ namespace CRUD_Projekt.Pages.Movies
             }
 
             _context.Movie.Add(Movie);
+            await _context.SaveChangesAsync();
+
+            var myRating = new MyRating { MovieId = Movie.Id, Rating = rating };
+            _context.MyRating.Add(myRating);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -35,5 +35,7 @@ namespace CRUD_Projekt.Models
         [Range(0, 10, ErrorMessage = "Ocena musi być w zakresie od 0 do 10.")]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Rating { get; set; }
+
+        public ICollection<MyRating>? MyRatings { get; set; }
     }
 }
